@@ -2,13 +2,10 @@ PYTHON ?= python
 VENV ?= .venv
 PIP := ${VENV}/bin/pip
 
-test:
-	${VENV}/bin/pytest -v
-.PHONY: test
+submodules:
+	git submodule update --init --recursive
+.PHONY: submodules
 
-#-------------------------------------------------------------------------------
-# Python virtual environment
-#-------------------------------------------------------------------------------
 $(VENV):
 	${PYTHON} -m venv ${VENV}
 	${PIP} install -q -U pip setuptools pytest ldap3
