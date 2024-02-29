@@ -1,0 +1,58 @@
+services:
+  upstream:
+    container_name: upstream
+    build:
+      context: upstream/.
+      dockerfile: Dockerfile
+    networks:
+      - default
+    environment:
+      - SLAPD_DEBUG=${SLAPD_DEBUG:-0}
+    volumes:
+      - ./upstream/slapd.ldif:/etc/openldap/slapd.ldif
+      - ./upstream/entries.ldif:/etc/openldap/entries.ldif
+      - upstream-var:/var/lib/ldap
+      - upstream-data:/etc/openldap/slapd.d
+    ports:
+      - 51389:389
+
+  buggy:
+    container_name: buggy
+    build:
+      context: buggy/.
+      dockerfile: Dockerfile
+    networks:
+      - default
+    environment:
+      - SLAPD_DEBUG=${SLAPD_DEBUG:-0}
+    volumes:
+      - ./buggy/slapd.ldif:/etc/openldap/slapd.ldif
+      - buggy-var:/var/lib/ldap
+      - buggy-data:/etc/openldap/slapd.d
+    ports:
+      - 52389:389
+
+  compiled:
+    container_name: compiled
+    build:
+      context: compiled/.
+      dockerfile: Dockerfile
+    networks:
+      - default
+    environment:
+      - SLAPD_DEBUG=${SLAPD_DEBUG:-0}
+    volumes:
+      - ./compiled/slapd.ldif:/etc/openldap/slapd.ldif
+      - compiled-var:/var/lib/ldap
+      - compiled-data:/etc/openldap/slapd.d
+    ports:
+      - 53389:389
+
+
+volumes:
+  upstream-data:
+  upstream-var:
+  buggy-data:
+  buggy-var:
+  compiled-data:
+  compiled-var:

@@ -1,0 +1,33 @@
+dn: dc=example,dc=com
+objectclass: top
+objectclass: domain
+dc: example
+
+dn: ou=people,dc=example,dc=com
+objectClass: top
+objectClass: organizationalUnit
+ou: people
+description: My organizational unit
+
+dn: uid=ciccio,ou=people,dc=example,dc=com
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+objectClass: posixAccount
+uid: ciccio
+cn: Ciccio Bello
+sn: Bello
+uidNumber: 1000
+gidNumber: 1000
+homeDirectory: /home/ciccio
+
+dn: uid=pippo,ou=people,dc=example,dc=com
+objectClass: top
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+uid: pippo
+cn: Pippo Bello
+sn: Bello
+
